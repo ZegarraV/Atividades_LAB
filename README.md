@@ -1,18 +1,11 @@
 # Histórias de Usuário - Sistema de Aluguel de Carros
+
 | ID | Persona | História de Usuário | Critérios de Aceitação |
-|---|---|---|---|
-| US01 | Usuário | Como novo usuário, quero me cadastrar no sistema informando meus dados pessoais e rendimentos, para poder acessar as funcionalidades de aluguel. | 1. O sistema deve validar RG e CPF.
-2. O sistema deve permitir o cadastro de no máximo 3 rendimentos por cliente.
-3. O acesso só é liberado após o login. |
-| US02 | Cliente | Como cliente, quero introduzir um novo pedido de aluguel pela internet, para iniciar o processo de contratação de um veículo. | 1. O cliente deve selecionar um veículo (marca, modelo, placa).
-2. O pedido deve ser registrado com status "Em Análise Financeira". |
-| US03 | Cliente | Como cliente, quero consultar, modificar ou cancelar meus pedidos de aluguel, para manter minhas solicitações atualizadas. | 1. Modificações só podem ocorrer enquanto o pedido não virou contrato.
-2. O cancelamento deve remover o pedido da fila de execução. |
-| US04 | Agente | Como agente (empresa/banco), quero avaliar financeiramente os pedidos pendentes, para decidir se o contrato pode ser executado. | 1. O agente deve visualizar os rendimentos do cliente.
-2. O agente deve emitir um parecer (positivo ou negativo). |
-| US05 | Agente | Como agente, quero modificar detalhes de um pedido após a análise, para ajustar cláusulas antes da assinatura final. | 1. A alteração deve ser notificada ao cliente.
-2. O sistema deve registrar quem realizou a modificação. |
-| US06 | Banco | Como banco parceiro, quero associar um contrato de crédito a um aluguel aprovado, para financiar a operação para o cliente. | 1. O contrato de crédito deve estar vinculado ao ID do pedido.
-2. O veículo deve poder ser registrado em nome do banco conforme o tipo de contrato. |
-| US07 | Sistema | Como sistema, quero gerar páginas web dinamicamente para os usuários, para que a interface seja atualizada conforme o status do pedido. | 1. Deve seguir a arquitetura MVC.
-2. A View deve refletir as mudanças feitas no Model pelo Controller em tempo real. |
+|:---:|:---:|---|---|
+| **US01** | Usuário | Como novo usuário, quero me cadastrar no sistema informando meus dados pessoais e rendimentos, para poder acessar as funcionalidades de aluguel. | 1. O sistema deve validar RG e CPF.<br>2. O sistema deve permitir o cadastro de no máximo 3 rendimentos por cliente.<br>3. O acesso só é liberado após o login. |
+| **US02** | Cliente | Como cliente, quero introduzir um novo pedido de aluguel pela internet, para iniciar o processo de contratação de um veículo. | 1. O cliente deve selecionar um veículo (marca, modelo, placa).<br>2. O pedido deve ser registrado com status "Em Análise Financeira". |
+| **US03** | Cliente | Como cliente, quero consultar, modificar ou cancelar meus pedidos de aluguel, para manter minhas solicitações atualizadas. | 1. Modificações só podem ocorrer enquanto o pedido não virou contrato.<br>2. O cancelamento deve remover o pedido da fila de execução. |
+| **US04** | Agente | Como agente (empresa/banco), quero avaliar financeiramente os pedidos pendentes, para decidir se o contrato pode ser executado. | 1. O agente deve visualizar os rendimentos do cliente.<br>2. O agente deve emitir um parecer (positivo ou negativo). |
+| **US05** | Agente | Como agente, quero modificar detalhes de um pedido após a análise, para ajustar cláusulas antes da assinatura final. | 1. A alteração deve ser notificada ao cliente.<br>2. O sistema deve registrar quem realizou a modificação. |
+| **US06** | Banco | Como banco parceiro, quero associar um contrato de crédito a um aluguel aprovado, para financiar a operação para o cliente. | 1. O contrato de crédito deve estar vinculado ao ID do pedido.<br>2. O veículo deve poder ser registrado em nome do banco conforme o tipo de contrato. |
+| **US07** | Sistema | Como sistema, quero gerar páginas web dinamicamente para os usuários, para que a interface seja atualizada conforme o status do pedido. | 1. Deve seguir a arquitetura MVC.<br>2. A View deve refletir as mudanças feitas no Model pelo Controller em tempo real. |
