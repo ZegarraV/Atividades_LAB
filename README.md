@@ -409,8 +409,8 @@ Este projeto está sob licença MIT. Veja o arquivo LICENSE para detalhes.
 
 Desenvolvido como projeto acadêmico de Software Laboratorio.
 
-**Data**: 2024-2025  
-**Status**: ✅ Production Ready
+**Data**: 04/2026  
+**Desenvolvedores**: Lucas Gonçalves Dolabela, Marcos Antunes, Davi Vinicius, Vinicius Zegarra.
 
 ---
 
