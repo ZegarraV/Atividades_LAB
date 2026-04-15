@@ -1,0 +1,48 @@
+micronaut:
+  application:
+    name: aluguelCarros
+  server:
+    port: 8080
+  router:
+    static-resources:
+      default:
+        enabled: true
+        mapping: /static/**
+        paths:
+          - classpath:static
+  views:
+    thymeleaf:
+      prefix: classpath:views/
+      suffix: .html
+  session:
+    http:
+      enabled: true
+      cookie-secure: false
+
+datasources:
+  default:
+    url: jdbc:h2:mem:aluguelcarrosdb;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;TRACE_LEVEL_SYSTEM_OUT=0
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ""
+    schema-generate: CREATE_DROP
+    dialect: H2
+
+jpa:
+  default:
+    entity-scan:
+      packages:
+        - 'com.aluguelcarros.model.entity'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: create-drop
+        show_sql: true
+        format_sql: true
+
+# Console H2 (útil para inspeção durante o desenvolvimento)
+h2:
+  console:
+    enabled: true
+    settings:
+      web-allow-others: false

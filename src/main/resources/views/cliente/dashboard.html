@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — AutoLoc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="stylesheet" th:href="@{/static/css/app.css}"/>
+</head>
+<body class="al-body">
+
+<!-- Sidebar -->
+<div class="al-sidebar" id="sidebar">
+  <div class="al-sidebar-brand"><i class="bi bi-car-front-fill me-2"></i>AutoLoc</div>
+  <nav class="al-sidebar-nav">
+    <a th:href="@{/cliente}" class="al-nav-link active"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+    <a th:href="@{/pedidos/novo-pedido}" class="al-nav-link"><i class="bi bi-plus-circle-fill"></i> Novo Pedido</a>
+    <a th:href="@{/automoveis}" class="al-nav-link"><i class="bi bi-car-front"></i> Automóveis</a>
+    <a th:href="@{/cliente/perfil}" class="al-nav-link"><i class="bi bi-person-circle"></i> Meu Perfil</a>
+  </nav>
+  <div class="al-sidebar-footer">
+    <div class="al-user-info">
+      <div class="al-avatar"><span th:text="${#strings.substring(usuarioNome,0,1)}">U</span></div>
+      <div>
+        <div class="al-user-name" th:text="${usuarioNome}">Usuário</div>
+        <div class="al-user-role">Cliente</div>
+      </div>
+    </div>
+    <form method="post" th:action="@{/logout}" class="mt-2">
+      <button type="submit" class="al-logout-btn"><i class="bi bi-box-arrow-right me-1"></i> Sair</button>
+    </form>
+  </div>
+</div>
+
+<div class="al-main">
+  <header class="al-topbar">
+    <button class="al-sidebar-toggle" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+    <h1 class="al-page-title">Dashboard</h1>
+  </header>
+
+  <div class="al-content">
+    <!-- Alertas -->
+    <div th:if="${msg}" class="alert al-alert-success alert-dismissible fade show mb-4" role="alert">
+      <i class="bi bi-check-circle-fill me-2"></i><span th:text="${msg}"></span>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+    <div th:if="${erro}" class="alert al-alert-danger alert-dismissible fade show mb-4" role="alert">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i><span th:text="${erro}"></span>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Stats -->
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6 col-lg-3">
+        <div class="al-stat-card">
+          <div class="al-stat-icon blue"><i class="bi bi-file-earmark-text"></i></div>
+          <div>
+            <div class="al-stat-value" th:text="${totalPedidos}">0</div>
+            <div class="al-stat-label">Total de Pedidos</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="al-stat-card">
+          <div class="al-stat-icon yellow"><i class="bi bi-clock-history"></i></div>
+          <div>
+            <div class="al-stat-value" th:text="${pedidosEmAndamento}">0</div>
+            <div class="al-stat-label">Em Andamento</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="al-stat-card">
+          <div class="al-stat-icon green"><i class="bi bi-check-circle"></i></div>
+          <div>
+            <div class="al-stat-value" th:text="${pedidosAprovados}">0</div>
+            <div class="al-stat-label">Aprovados</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="al-stat-card">
+          <div class="al-stat-icon purple"><i class="bi bi-cash-coin"></i></div>
+          <div>
+            <div class="al-stat-value" th:text="${totalRendimentos}">0</div>
+            <div class="al-stat-label">Rendimentos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pedidos recentes -->
+    <div class="al-card">
+      <div class="al-section-header">
+        <span class="al-section-title"><i class="bi bi-list-ul me-2" style="color:var(--accent)"></i>Meus Pedidos</span>
+        <a th:href="@{/pedidos/novo-pedido}" class="al-btn al-btn-primary al-btn-sm">
+          <i class="bi bi-plus-lg"></i> Novo Pedido
+        </a>
+      </div>
+
+      <div th:if="${pedidos == null or #lists.isEmpty(pedidos)}" class="al-empty">
+        <i class="bi bi-car-front"></i>
+        <p>Você ainda não tem pedidos.<br/>Que tal alugar seu primeiro automóvel?</p>
+        <a th:href="@{/pedidos/novo-pedido}" class="al-btn al-btn-primary mt-3">
+          <i class="bi bi-plus-circle"></i> Fazer Pedido
+        </a>
+      </div>
+
+      <div th:if="${pedidos != null and !#lists.isEmpty(pedidos)}" class="table-responsive">
+        <table class="al-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Automóvel</th>
+              <th>Período</th>
+              <th>Valor Total</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="pedido : ${pedidos}">
+              <td style="color:var(--text-muted); font-size:12px" th:text="${pedido.id}">1</td>
+              <td>
+                <div style="font-weight:600" th:text="${pedido.automovel.marca + ' ' + pedido.automovel.modelo}">—</div>
+                <div style="font-size:12px; color:var(--text-muted)" th:text="${pedido.automovel.placa}">—</div>
+              </td>
+              <td>
+                <div style="font-size:13px" th:text="${#temporals.format(pedido.dataInicio,'dd/MM/yyyy')}">—</div>
+                <div style="font-size:12px; color:var(--text-muted)" th:text="${'até ' + #temporals.format(pedido.dataFim,'dd/MM/yyyy')}">—</div>
+              </td>
+              <td style="font-weight:600; color:var(--accent)"
+                  th:text="${'R$ ' + #numbers.formatDecimal(pedido.calcularValor(),1,'POINT',2,'COMMA')}">R$ 0,00</td>
+              <td>
+                <span th:with="s=${pedido.status.name().toLowerCase().replace('_','-')}"
+                      th:class="'al-badge ' + ${s}"
+                      th:text="${pedido.status.name()}">STATUS</span>
+              </td>
+              <td>
+                <div class="d-flex gap-2 flex-wrap">
+                  <form th:if="${pedido.status.name() == 'RASCUNHO'}"
+                        method="post" th:action="@{/pedidos/{id}/enviar(id=${pedido.id})}">
+                    <button type="submit" class="al-btn al-btn-success al-btn-sm">
+                      <i class="bi bi-send"></i> Enviar
+                    </button>
+                  </form>
+                  <form th:if="${pedido.status.name() == 'RASCUNHO' or pedido.status.name() == 'ENVIADO'}"
+                        method="post" th:action="@{/pedidos/{id}/cancelar(id=${pedido.id})}">
+                    <button type="submit" class="al-btn al-btn-danger al-btn-sm"
+                            onclick="return confirm('Cancelar este pedido?')">
+                      <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('collapsed');
+    document.querySelector('.al-main').classList.toggle('expanded');
+  }
+</script>
+</body>
+</html>
