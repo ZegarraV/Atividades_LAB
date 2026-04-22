@@ -1,0 +1,22 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Reduz nível geral para INFO -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <!-- Hibernate SQL -->
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>
+
+    <!-- Micronaut startup -->
+    <logger name="io.micronaut" level="INFO"/>
+    <logger name="io.micronaut.context.lifecycle" level="WARN"/>
+    <logger name="io.micronaut.context.condition" level="WARN"/>
+    <logger name="io.micronaut.core" level="WARN"/>
+</configuration>

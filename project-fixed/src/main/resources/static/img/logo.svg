@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" fill="none">
+  <!-- Background pill -->
+  <rect width="240" height="64" rx="12" fill="#0f1629"/>
+
+  <!-- Car icon -->
+  <g transform="translate(10, 10)">
+    <!-- Car body top -->
+    <path d="M8 28 L14 18 L32 16 L40 18 L46 28 Z" fill="#3b82f6" opacity="0.9"/>
+    <!-- Car body main -->
+    <rect x="4" y="28" width="46" height="14" rx="3" fill="#3b82f6"/>
+    <!-- Windshield -->
+    <path d="M14 19 L17 28 L35 28 L38 19 Z" fill="#1e3a6e" opacity="0.8"/>
+    <!-- Front light -->
+    <rect x="5" y="30" width="6" height="4" rx="1" fill="#fbbf24"/>
+    <!-- Rear light -->
+    <rect x="43" y="30" width="6" height="4" rx="1" fill="#ef4444"/>
+    <!-- Front wheel -->
+    <circle cx="14" cy="43" r="7" fill="#1a2340" stroke="#3b82f6" stroke-width="2.5"/>
+    <circle cx="14" cy="43" r="3" fill="#3b82f6"/>
+    <!-- Rear wheel -->
+    <circle cx="38" cy="43" r="7" fill="#1a2340" stroke="#3b82f6" stroke-width="2.5"/>
+    <circle cx="38" cy="43" r="3" fill="#3b82f6"/>
+    <!-- Speed lines -->
+    <line x1="0" y1="32" x2="4" y2="32" stroke="#3b82f6" stroke-width="1.5" opacity="0.5"/>
+    <line x1="0" y1="36" x2="4" y2="36" stroke="#3b82f6" stroke-width="2" opacity="0.7"/>
+    <line x1="0" y1="40" x2="4" y2="40" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- Text: AUTO -->
+  <text x="80" y="30" font-family="'Racing Sans One', Arial, sans-serif" font-size="22" fill="#f1f5f9" letter-spacing="1">AUTO</text>
+  <!-- Text: LOC -->
+  <text x="80" y="52" font-family="'Racing Sans One', Arial, sans-serif" font-size="22" fill="#3b82f6" letter-spacing="1">LOC</text>
+
+  <!-- Divider line -->
+  <line x1="76" y1="12" x2="76" y2="52" stroke="#3b82f6" stroke-width="2" opacity="0.5"/>
+
+  <!-- Tagline -->
+  <text x="158" y="44" font-family="'Rajdhani', Arial, sans-serif" font-size="10" fill="#94a3b8" letter-spacing="2">ALUGUEL DE VEÍCULOS</text>
+</svg>
